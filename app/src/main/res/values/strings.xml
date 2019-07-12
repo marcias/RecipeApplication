@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">RecipeApplication</string>
+    <string name="app_name">My Recipes</string>
     <string name="action_settings">Settings</string>
 </resources>

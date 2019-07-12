@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.marciasc.recipeapplication.RecipesActivity">
+    <item
+        android:id="@+id/action_add_recipe"
+        android:icon="@drawable/ic_add"
+        android:title="New recipe"
+        app:showAsAction="always" />
+</menu>
