@@ -1,4 +1,4 @@
-package com.marciasc.recipeapplication;
+package com.marciasc.recipeapplication.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,16 +6,20 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.marciasc.recipeapplication.R;
+import com.marciasc.recipeapplication.viewmodel.RecipeViewModel;
 import com.marciasc.recipeapplication.model.Recipe;
 
 import java.util.List;
 
 public class RecipesActivity extends AppCompatActivity {
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

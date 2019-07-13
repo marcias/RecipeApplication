@@ -21,7 +21,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
     private Context mContext;
     private OnRemoveButtonPressed mListener;
 
-    ImageListAdapter(Context context, OnRemoveButtonPressed listener) {
+    public ImageListAdapter(Context context, OnRemoveButtonPressed listener) {
         mContext = context;
         mListener = listener;
         mLayoutInflater = LayoutInflater.from(context);
@@ -76,7 +76,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
         notifyDataSetChanged();
     }
 
-    interface OnRemoveButtonPressed {
+    public interface OnRemoveButtonPressed {
         void onRemoveButtonPressed(int position);
     }
 }

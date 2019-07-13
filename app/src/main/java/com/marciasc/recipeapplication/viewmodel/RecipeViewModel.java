@@ -1,4 +1,4 @@
-package com.marciasc.recipeapplication;
+package com.marciasc.recipeapplication.viewmodel;
 
 import android.app.Application;
 import android.util.Log;
@@ -22,7 +22,7 @@ public class RecipeViewModel extends AndroidViewModel {
         mRecipes = mRepository.getRecipes();
     }
 
-    LiveData<List<Recipe>> getRecipes() {
+    public LiveData<List<Recipe>> getRecipes() {
         return mRecipes;
     }
 
