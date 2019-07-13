@@ -1,42 +1,67 @@
 package com.marciasc.recipeapplication.model;
 
-import android.net.Uri;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+import com.marciasc.recipeapplication.Converters;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "recipe_table")
 public class Recipe {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private int mId;
     @ColumnInfo(name = "title")
     private String mTitle;
     @ColumnInfo(name = "description")
     private String mDescription;
-    @ColumnInfo(name = "images")
-    private List<Uri> mImagesPath;
+    @ColumnInfo(name = "imagesPath")
+    private List<String> mImagesPath;
 
-    public String getmTitle() {
+    public Recipe(String title, String description, List<String> imagesPath) {
+        mTitle = title;
+        mDescription = description;
+        mImagesPath = imagesPath;
+    }
+
+    public int getId() {
+        return mId;
+    }
+
+
+    public void setId(int id) {
+        mId = id;
+    }
+
+    public String getTitle() {
         return mTitle;
     }
 
-    public void setmTitle(String mTitle) {
+    public void setTitle(int id) {
+        mId = id;
+    }
+
+    public void setTitle(String mTitle) {
         this.mTitle = mTitle;
     }
 
-    public String getmDescription() {
+    public String getDescription() {
         return mDescription;
     }
 
-    public void setmDescription(String mDescription) {
+    public void setDescription(String mDescription) {
         this.mDescription = mDescription;
     }
 
-    public List<Uri> getmImagesPath() {
+    public List<String> getImagesPath() {
         return mImagesPath;
     }
 
-    public void setmImagesPath(List<Uri> imagesPath) {
+    public void setImagesPath(ArrayList<String> imagesPath) {
         this.mImagesPath = imagesPath;
     }
 }

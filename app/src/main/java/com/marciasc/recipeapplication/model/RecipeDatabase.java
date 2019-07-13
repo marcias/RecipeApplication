@@ -4,12 +4,16 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
-import androidx.room.DatabaseConfiguration;
+import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
+import com.marciasc.recipeapplication.Converters;
+
+@Database(entities = {Recipe.class}, version = 1, exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class RecipeDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "recipe_database";
 
@@ -38,13 +42,6 @@ public abstract class RecipeDatabase extends RoomDatabase {
         }
         return mInstance;
     }
-
-    @NonNull
-    @Override
-    protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration config) {
-        return null;
-    }
-
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
         private RecipeDao mRecipeDao;

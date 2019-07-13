@@ -1,8 +1,8 @@
 package com.marciasc.recipeapplication;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,23 +10,30 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.marciasc.recipeapplication.model.Recipe;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddRecipeActivity extends AppCompatActivity implements ImageListAdapter.OnRemoveButtonPressed {
     private final int REQUEST_CODE = 1001;
-    private List<Uri> mListImages = new ArrayList<>();
+    private List<String> mListImages = new ArrayList<>();
     private LinearLayoutManager mLayoutManager;
     private RecyclerView mRecyclerView;
     private ImageListAdapter mImageListAdapter;
+    private RecipeViewModel mRecipeViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
+
+        mRecipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
 
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
@@ -52,11 +59,8 @@ public class AddRecipeActivity extends AppCompatActivity implements ImageListAda
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_save_recipe) {
-            return true;
-        }
-
+//        Log.d("AddRecipeActivity", ">> onOptionsSelected " + item.getItemId());
+        saveRecipe();
         return super.onOptionsItemSelected(item);
     }
 
@@ -67,8 +71,8 @@ public class AddRecipeActivity extends AppCompatActivity implements ImageListAda
         startActivityForResult(intent, REQUEST_CODE);
     }
 
-    private void removeImage(Uri uri) {
-        mListImages.remove(uri);
+    private void removeImage(String imagePath) {
+        mListImages.remove(imagePath);
         mImageListAdapter.setList(mListImages);
     }
 
@@ -76,9 +80,16 @@ public class AddRecipeActivity extends AppCompatActivity implements ImageListAda
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && data.getData() != null) {
-            mListImages.add(data.getData());
+            mListImages.add(data.getData().toString());
             mImageListAdapter.setList(mListImages);
         }
+    }
+
+    private void saveRecipe() {
+        String title = ((TextInputEditText) findViewById(R.id.et_title)).getText().toString();
+        String description = ((TextInputEditText) findViewById(R.id.et_description)).getText().toString();
+        mRecipeViewModel.insert(new Recipe(title, description, mListImages));
+        finish();
     }
 
     @Override
