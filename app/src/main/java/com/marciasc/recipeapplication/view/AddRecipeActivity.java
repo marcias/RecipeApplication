@@ -6,8 +6,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +21,7 @@ import com.marciasc.recipeapplication.model.Recipe;
 
 import java.util.ArrayList;
 
-public class AddRecipeActivity extends AppCompatActivity implements RemovableImageAdapter.OnRemoveButtonPressed {
+public class AddRecipeActivity extends AppCompatActivity implements RemovableImageAdapter.OnRemoveButtonPressed, RemovableImageAdapter.OnPickImageButtonPressed {
     private final int REQUEST_CODE = 1001;
     private final String LIST_STATE_KEY = "list_state_key";
     private ArrayList<String> mListImages = new ArrayList<>();
@@ -42,21 +40,12 @@ public class AddRecipeActivity extends AppCompatActivity implements RemovableIma
         }
 
         mRecipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
-
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mImageListAdapter = new RemovableImageAdapter(this, this);
+        mImageListAdapter = new RemovableImageAdapter(this, this, this);
         mImageListAdapter.setList(mListImages);
         mRecyclerView = findViewById(R.id.rv_selected_images);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mImageListAdapter);
-
-        ImageView ibAddImage = findViewById(R.id.ib_add_image);
-        ibAddImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickImage();
-            }
-        });
     }
 
     @Override
@@ -122,5 +111,10 @@ public class AddRecipeActivity extends AppCompatActivity implements RemovableIma
     @Override
     public void onRemoveButtonPressed(int position) {
         removeImage(mListImages.get(position));
+    }
+
+    @Override
+    public void onPickImageButtonPressed() {
+        pickImage();
     }
 }

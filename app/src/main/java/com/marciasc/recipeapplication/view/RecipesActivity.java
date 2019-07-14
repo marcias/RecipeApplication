@@ -33,6 +33,7 @@ public class RecipesActivity extends AppCompatActivity {
         initUi();
         final RecipeListAdapter recipeListAdapter = new RecipeListAdapter(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(recipeListAdapter);
 
         RecipeViewModel recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);

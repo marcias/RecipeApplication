@@ -1,14 +1,10 @@
 package com.marciasc.recipeapplication.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,10 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.marciasc.recipeapplication.R;
 
-import java.io.IOException;
 import java.util.List;
 
-public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ImageViewHolder> {
+public class ImageListAdapter extends RecyclerView.Adapter<ImageViewHolder> {
     protected LayoutInflater mLayoutInflater;
     protected List<String> mImageList;
     private Context mContext;
@@ -37,37 +32,18 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ImageViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         if (mImageList != null) {
             Uri imageUri = Uri.parse(mImageList.get(position));
             Glide.with(mContext)
                     .load(imageUri)
-                    .into(holder.imageView);
+                    .into(holder.getImageView());
         }
     }
 
     @Override
     public int getItemCount() {
         return mImageList != null ? mImageList.size() : 0;
-    }
-
-    public class ImageViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imageView;
-        private ImageView removePhoto;
-
-        protected ImageViewHolder(View itemView) {
-            super(itemView);
-            imageView = itemView.findViewById(R.id.iv_image);
-            removePhoto = itemView.findViewById(R.id.iv_remove_image);
-        }
-
-        public ImageView getImage() {
-            return imageView;
-        }
-
-        public ImageView getRemoveIcon() {
-            return removePhoto;
-        }
     }
 
     public void setList(List<String> imageList) {
