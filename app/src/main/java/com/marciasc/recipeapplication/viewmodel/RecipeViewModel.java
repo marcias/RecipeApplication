@@ -1,7 +1,6 @@
 package com.marciasc.recipeapplication.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -27,8 +26,6 @@ public class RecipeViewModel extends AndroidViewModel {
     }
 
     public void insert(Recipe recipe) {
-        Log.d("RecipeViewModel", ">> saving recipe " + recipe.getTitle());
-
         mRepository.insert(recipe);
     }
 }

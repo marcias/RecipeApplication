@@ -2,7 +2,6 @@ package com.marciasc.recipeapplication.model;
 
 import android.app.Application;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -36,7 +35,6 @@ public class RecipeRepository {
         @Override
         protected Void doInBackground(Recipe... recipes) {
             mAsyncTaskDao.insert(recipes[0]);
-            Log.d("Recipe repository", ">> saving recipe " + recipes[0].getTitle());
             return null;
         }
     }

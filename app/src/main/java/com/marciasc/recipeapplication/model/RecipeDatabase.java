@@ -25,7 +25,6 @@ public abstract class RecipeDatabase extends RoomDatabase {
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
-            new PopulateDbAsync(mInstance).execute();
         }
     };
 
@@ -41,23 +40,5 @@ public abstract class RecipeDatabase extends RoomDatabase {
             }
         }
         return mInstance;
-    }
-
-    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
-        private RecipeDao mRecipeDao;
-
-        PopulateDbAsync(RecipeDatabase db) {
-            mRecipeDao = db.recipeDao();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-//            mRecipeDao.deleteAll();
-//            for (int i = 0; i <= words.length - 1; i++) {
-//                Recipe recipe = new Recipe();
-//                mRecipeDao.insert(recipe);
-//            }
-            return null;
-        }
     }
 }

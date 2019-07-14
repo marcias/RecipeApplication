@@ -3,9 +3,6 @@ package com.marciasc.recipeapplication.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
-
-import com.marciasc.recipeapplication.Converters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +29,6 @@ public class Recipe {
         return mId;
     }
 
-
     public void setId(int id) {
         mId = id;
     }
@@ -40,11 +36,7 @@ public class Recipe {
     public String getTitle() {
         return mTitle;
     }
-
-    public void setTitle(int id) {
-        mId = id;
-    }
-
+    
     public void setTitle(String mTitle) {
         this.mTitle = mTitle;
     }
