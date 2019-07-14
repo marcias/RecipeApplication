@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +42,6 @@ public class AddRecipeActivity extends AppCompatActivity implements RemovableIma
         mRecipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
 
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-
         mImageListAdapter = new RemovableImageAdapter(this, this);
         mRecyclerView = findViewById(R.id.rv_selected_images);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -87,7 +88,7 @@ public class AddRecipeActivity extends AppCompatActivity implements RemovableIma
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && data.getData() != null) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE && data.getData() != null) {
             Uri uri = data.getData();
             mListImages.add(uri.toString());
             mImageListAdapter.setList(mListImages);
@@ -103,8 +104,10 @@ public class AddRecipeActivity extends AppCompatActivity implements RemovableIma
     private void saveRecipe() {
         String title = ((TextInputEditText) findViewById(R.id.et_title)).getText().toString();
         String description = ((TextInputEditText) findViewById(R.id.et_description)).getText().toString();
-        mRecipeViewModel.insert(new Recipe(title, description, mListImages));
-        finish();
+        if (!title.equals(null) && !title.isEmpty() && !description.equals(null) && !description.isEmpty()) {
+            mRecipeViewModel.insert(new Recipe(title, description, mListImages));
+            finish();
+        }
     }
 
     @Override

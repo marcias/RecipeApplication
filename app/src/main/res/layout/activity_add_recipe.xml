@@ -10,13 +10,10 @@
     tools:context=".view.AddRecipeActivity">
 
     <TextView
-        style="@style/text_view_style"
-        android:text="Title:" />
+        style="@style/title_view_style"
+        android:text="@string/title" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputLayout style="@style/text_input_layout_style">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_title"
@@ -27,26 +24,23 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        style="@style/text_view_style"
-        android:text="Description:" />
+        style="@style/title_view_style"
+        android:text="@string/description" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputLayout style="@style/text_input_layout_style">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="top|left"
+            android:gravity="top|start"
             android:maxLines="5"
             android:minLines="5" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        style="@style/text_view_style"
-        android:text="Images:" />
+        style="@style/title_view_style"
+        android:text="@string/images" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,8 +50,10 @@
         <ImageButton
             android:id="@+id/ib_add_image"
             android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/bg_square"
             android:padding="30dp"
             android:src="@drawable/ic_add_image" />

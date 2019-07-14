@@ -12,14 +12,29 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="text_view_style">
+    <style name="title_view_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/darkGray</item>
         <item name="android:textAppearance">
             @android:style/TextAppearance.Large
         </item>
-        <item name="android:layout_marginTop">20dp</item>
         <item name="android:layout_marginBottom">2dp</item>
     </style>
 
+    <style name="text_view_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/darkGray</item>
+        <item name="android:textAppearance">
+            @android:style/TextAppearance.Medium
+        </item>
+        <item name="android:layout_marginBottom">2dp</item>
+    </style>
+
+    <style name="text_input_layout_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">20dp</item>
+    </style>
 </resources>

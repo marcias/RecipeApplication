@@ -8,12 +8,13 @@
     android:padding="10dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".view.AddRecipeActivity"
-    android:layout_margin="20dp"
+    android:layout_margin="5dp"
     android:background="@drawable/bg_square">
 
     <TextView
         android:id="@+id/tv_title"
         style="@style/text_view_style"
+        android:textStyle="bold"
         tools:text="Green Chicken Curry" />
 
     <androidx.recyclerview.widget.RecyclerView

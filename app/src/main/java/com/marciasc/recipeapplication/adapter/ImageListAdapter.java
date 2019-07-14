@@ -63,6 +63,10 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
             removePhoto = itemView.findViewById(R.id.iv_remove_image);
         }
 
+        public ImageView getImage() {
+            return imageView;
+        }
+
         public ImageView getRemoveIcon() {
             return removePhoto;
         }

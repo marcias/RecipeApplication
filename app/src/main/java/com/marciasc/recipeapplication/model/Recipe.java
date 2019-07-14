@@ -36,7 +36,7 @@ public class Recipe {
     public String getTitle() {
         return mTitle;
     }
-    
+
     public void setTitle(String mTitle) {
         this.mTitle = mTitle;
     }
