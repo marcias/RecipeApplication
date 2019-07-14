@@ -1,4 +1,4 @@
-package com.marciasc.recipeapplication;
+package com.marciasc.recipeapplication.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.marciasc.recipeapplication.R;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -19,11 +21,9 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
     private LayoutInflater mLayoutInflater;
     private List<String> mImageList;
     private Context mContext;
-    private OnRemoveButtonPressed mListener;
 
-    public ImageListAdapter(Context context, OnRemoveButtonPressed listener) {
+    public ImageListAdapter(Context context) {
         mContext = context;
-        mListener = listener;
         mLayoutInflater = LayoutInflater.from(context);
     }
 
@@ -46,13 +46,6 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
             }
             holder.imageView.setImageBitmap(bitmap);
         }
-
-        holder.removePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onRemoveButtonPressed(position);
-            }
-        });
     }
 
     @Override
@@ -69,6 +62,10 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
             imageView = itemView.findViewById(R.id.iv_image);
             removePhoto = itemView.findViewById(R.id.iv_remove_image);
         }
+
+        public ImageView getRemoveIcon() {
+            return removePhoto;
+        }
     }
 
     public void setList(List<String> imageList) {
@@ -76,7 +73,5 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
         notifyDataSetChanged();
     }
 
-    public interface OnRemoveButtonPressed {
-        void onRemoveButtonPressed(int position);
-    }
+
 }

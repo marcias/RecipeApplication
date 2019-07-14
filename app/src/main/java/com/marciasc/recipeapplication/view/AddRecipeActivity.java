@@ -1,6 +1,8 @@
 package com.marciasc.recipeapplication.view;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.marciasc.recipeapplication.ImageListAdapter;
+import com.marciasc.recipeapplication.adapter.RemovableImageAdapter;
 import com.marciasc.recipeapplication.R;
 import com.marciasc.recipeapplication.viewmodel.RecipeViewModel;
 import com.marciasc.recipeapplication.model.Recipe;
@@ -22,12 +24,12 @@ import com.marciasc.recipeapplication.model.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddRecipeActivity extends AppCompatActivity implements ImageListAdapter.OnRemoveButtonPressed {
+public class AddRecipeActivity extends AppCompatActivity implements RemovableImageAdapter.OnRemoveButtonPressed {
     private final int REQUEST_CODE = 1001;
     private List<String> mListImages = new ArrayList<>();
     private LinearLayoutManager mLayoutManager;
     private RecyclerView mRecyclerView;
-    private ImageListAdapter mImageListAdapter;
+    private RemovableImageAdapter mImageListAdapter;
     private RecipeViewModel mRecipeViewModel;
 
     @Override
@@ -39,7 +41,7 @@ public class AddRecipeActivity extends AppCompatActivity implements ImageListAda
 
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        mImageListAdapter = new ImageListAdapter(this, this);
+        mImageListAdapter = new RemovableImageAdapter(this, this);
         mRecyclerView = findViewById(R.id.rv_selected_images);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mImageListAdapter);
@@ -61,15 +63,19 @@ public class AddRecipeActivity extends AppCompatActivity implements ImageListAda
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        Log.d("AddRecipeActivity", ">> onOptionsSelected " + item.getItemId());
         saveRecipe();
         return super.onOptionsItemSelected(item);
     }
 
     private void pickImage() {
         Intent intent = new Intent();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        } else {
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+        }
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, REQUEST_CODE);
     }
 
@@ -82,8 +88,15 @@ public class AddRecipeActivity extends AppCompatActivity implements ImageListAda
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && data.getData() != null) {
-            mListImages.add(data.getData().toString());
+            Uri uri = data.getData();
+            mListImages.add(uri.toString());
             mImageListAdapter.setList(mListImages);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                final int takeFlags = data.getFlags()
+                        & (Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                getContentResolver().takePersistableUriPermission(uri, takeFlags);
+            }
         }
     }
 
