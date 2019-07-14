@@ -1,7 +1,6 @@
 package com.marciasc.recipeapplication.model;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -10,10 +9,10 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.marciasc.recipeapplication.Converters;
+import com.marciasc.recipeapplication.util.Converter;
 
 @Database(entities = {Recipe.class}, version = 1, exportSchema = false)
-@TypeConverters({Converters.class})
+@TypeConverters({Converter.class})
 public abstract class RecipeDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "recipe_database";
 

@@ -1,4 +1,4 @@
-package com.marciasc.recipeapplication;
+package com.marciasc.recipeapplication.util;
 
 import androidx.room.TypeConverter;
 
@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class Converters {
+public class Converter {
     @TypeConverter
     public static List<String> fromString(String value) {
         Type listType = new TypeToken<List<String>>() {

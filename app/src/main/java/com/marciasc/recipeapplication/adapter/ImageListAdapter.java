@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +13,15 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.marciasc.recipeapplication.R;
 
 import java.io.IOException;
 import java.util.List;
 
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ImageViewHolder> {
-    private LayoutInflater mLayoutInflater;
-    private List<String> mImageList;
+    protected LayoutInflater mLayoutInflater;
+    protected List<String> mImageList;
     private Context mContext;
 
     public ImageListAdapter(Context context) {
@@ -38,13 +40,9 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
     public void onBindViewHolder(@NonNull ImageViewHolder holder, final int position) {
         if (mImageList != null) {
             Uri imageUri = Uri.parse(mImageList.get(position));
-            Bitmap bitmap = null;
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), imageUri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            holder.imageView.setImageBitmap(bitmap);
+            Glide.with(mContext)
+                    .load(imageUri)
+                    .into(holder.imageView);
         }
     }
 
@@ -57,7 +55,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
         private ImageView imageView;
         private ImageView removePhoto;
 
-        private ImageViewHolder(View itemView) {
+        protected ImageViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.iv_image);
             removePhoto = itemView.findViewById(R.id.iv_remove_image);
@@ -76,6 +74,5 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
         mImageList = imageList;
         notifyDataSetChanged();
     }
-
 
 }

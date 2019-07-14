@@ -1,68 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="25dp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".view.AddRecipeActivity">
-
-    <TextView
-        style="@style/title_view_style"
-        android:text="@string/title" />
-
-    <com.google.android.material.textfield.TextInputLayout style="@style/text_input_layout_style">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nextFocusDown="@id/et_description"
-            android:singleLine="true" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        style="@style/title_view_style"
-        android:text="@string/description" />
-
-    <com.google.android.material.textfield.TextInputLayout style="@style/text_input_layout_style">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top|start"
-            android:maxLines="5"
-            android:minLines="5" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        style="@style/title_view_style"
-        android:text="@string/images" />
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="25dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".view.AddRecipeActivity">
 
-        <ImageButton
-            android:id="@+id/ib_add_image"
-            android:layout_width="90dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/bg_square"
-            android:padding="30dp"
-            android:src="@drawable/ic_add_image" />
+        <TextView
+            style="@style/title_view_style"
+            android:text="@string/title" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_selected_images"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <com.google.android.material.textfield.TextInputLayout style="@style/text_input_layout_style">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nextFocusDown="@id/et_description"
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            style="@style/title_view_style"
+            android:text="@string/description" />
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/text_input_layout_style">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|start"
+                android:maxLines="5"
+                android:minLines="5" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            style="@style/title_view_style"
+            android:text="@string/images" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/ib_add_image"
+                android:layout_width="90dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/bg_square"
+                android:padding="30dp"
+                android:src="@drawable/ic_add_image" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_selected_images"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

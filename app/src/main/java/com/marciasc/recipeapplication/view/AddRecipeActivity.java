@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,11 +22,11 @@ import com.marciasc.recipeapplication.viewmodel.RecipeViewModel;
 import com.marciasc.recipeapplication.model.Recipe;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AddRecipeActivity extends AppCompatActivity implements RemovableImageAdapter.OnRemoveButtonPressed {
     private final int REQUEST_CODE = 1001;
-    private List<String> mListImages = new ArrayList<>();
+    private final String LIST_STATE_KEY = "list_state_key";
+    private ArrayList<String> mListImages = new ArrayList<>();
     private LinearLayoutManager mLayoutManager;
     private RecyclerView mRecyclerView;
     private RemovableImageAdapter mImageListAdapter;
@@ -39,10 +37,15 @@ public class AddRecipeActivity extends AppCompatActivity implements RemovableIma
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
 
+        if (savedInstanceState != null) {
+            mListImages = savedInstanceState.getStringArrayList(LIST_STATE_KEY);
+        }
+
         mRecipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
 
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mImageListAdapter = new RemovableImageAdapter(this, this);
+        mImageListAdapter.setList(mListImages);
         mRecyclerView = findViewById(R.id.rv_selected_images);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mImageListAdapter);
@@ -99,6 +102,12 @@ public class AddRecipeActivity extends AppCompatActivity implements RemovableIma
                 getContentResolver().takePersistableUriPermission(uri, takeFlags);
             }
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putStringArrayList(LIST_STATE_KEY, mListImages);
+        super.onSaveInstanceState(outState);
     }
 
     private void saveRecipe() {
