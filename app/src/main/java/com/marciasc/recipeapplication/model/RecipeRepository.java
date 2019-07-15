@@ -8,8 +8,8 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class RecipeRepository {
-    private RecipeDao mDao;
-    private LiveData<List<Recipe>> mRecipes;
+    private final RecipeDao mDao;
+    private final LiveData<List<Recipe>> mRecipes;
 
     public RecipeRepository(Application application) {
         RecipeDatabase db = RecipeDatabase.getDatabase(application.getApplicationContext());
@@ -26,7 +26,7 @@ public class RecipeRepository {
     }
 
     private static class insertAsyncTask extends AsyncTask<Recipe, Void, Void> {
-        private RecipeDao mAsyncTaskDao;
+        private final RecipeDao mAsyncTaskDao;
 
         insertAsyncTask(RecipeDao wordDao) {
             mAsyncTaskDao = wordDao;

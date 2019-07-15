@@ -25,8 +25,6 @@ public class AddRecipeActivity extends AppCompatActivity implements RemovableIma
     private final int REQUEST_CODE = 1001;
     private final String LIST_STATE_KEY = "list_state_key";
     private ArrayList<String> mListImages = new ArrayList<>();
-    private LinearLayoutManager mLayoutManager;
-    private RecyclerView mRecyclerView;
     private RemovableImageAdapter mImageListAdapter;
     private RecipeViewModel mRecipeViewModel;
 
@@ -40,10 +38,10 @@ public class AddRecipeActivity extends AppCompatActivity implements RemovableIma
         }
 
         mRecipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
-        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mImageListAdapter = new RemovableImageAdapter(this, this, this);
         mImageListAdapter.setList(mListImages);
-        mRecyclerView = findViewById(R.id.rv_selected_images);
+        RecyclerView mRecyclerView = findViewById(R.id.rv_selected_images);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mImageListAdapter);
     }
@@ -102,7 +100,7 @@ public class AddRecipeActivity extends AppCompatActivity implements RemovableIma
     private void saveRecipe() {
         String title = ((TextInputEditText) findViewById(R.id.et_title)).getText().toString();
         String description = ((TextInputEditText) findViewById(R.id.et_description)).getText().toString();
-        if (!title.equals(null) && !title.isEmpty() && !description.equals(null) && !description.isEmpty()) {
+        if (title != null && !title.isEmpty() && description != null && !description.isEmpty()) {
             mRecipeViewModel.insert(new Recipe(title, description, mListImages));
             finish();
         }

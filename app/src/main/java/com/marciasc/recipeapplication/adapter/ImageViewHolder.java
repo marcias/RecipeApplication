@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.marciasc.recipeapplication.R;
 
 public class ImageViewHolder extends RecyclerView.ViewHolder {
-    private ImageView imageView;
-    private ImageView removePhoto;
+    private final ImageView imageView;
+    private final ImageView removePhoto;
 
     protected ImageViewHolder(View itemView) {
         super(itemView);

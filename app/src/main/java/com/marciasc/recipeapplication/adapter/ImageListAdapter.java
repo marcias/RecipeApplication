@@ -15,9 +15,9 @@ import com.marciasc.recipeapplication.R;
 import java.util.List;
 
 public class ImageListAdapter extends RecyclerView.Adapter<ImageViewHolder> {
-    protected LayoutInflater mLayoutInflater;
-    protected List<String> mImageList;
-    private Context mContext;
+    private final LayoutInflater mLayoutInflater;
+    private final Context mContext;
+    private List<String> mImageList;
 
     public ImageListAdapter(Context context) {
         mContext = context;
@@ -37,6 +37,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageViewHolder> {
             Uri imageUri = Uri.parse(mImageList.get(position));
             Glide.with(mContext)
                     .load(imageUri)
+                    .override(400,400)
                     .into(holder.getImageView());
         }
     }

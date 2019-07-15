@@ -19,7 +19,7 @@ public abstract class RecipeDatabase extends RoomDatabase {
     public abstract RecipeDao recipeDao();
 
     private static RecipeDatabase mInstance;
-    private static RecipeDatabase.Callback sCallback = new RoomDatabase.Callback() {
+    private static final RecipeDatabase.Callback sCallback = new RoomDatabase.Callback() {
 
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {

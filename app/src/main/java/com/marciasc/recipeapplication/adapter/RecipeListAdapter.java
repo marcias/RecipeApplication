@@ -17,9 +17,9 @@ import com.marciasc.recipeapplication.model.Recipe;
 import java.util.List;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder> {
-    private LayoutInflater mLayoutInflater;
+    private final LayoutInflater mLayoutInflater;
+    private final Context mContext;
     private List<Recipe> mRecipeList;
-    private Context mContext;
 
     public RecipeListAdapter(Context context) {
         mContext = context;
@@ -50,9 +50,9 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     }
 
     public class RecipeViewHolder extends RecyclerView.ViewHolder {
-        private TextView title;
-        private RecyclerView recyclerView;
-        private TextView description;
+        private final TextView title;
+        private final RecyclerView recyclerView;
+        private final TextView description;
 
         private RecipeViewHolder(View itemView) {
             super(itemView);

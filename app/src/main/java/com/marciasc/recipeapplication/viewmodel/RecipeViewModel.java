@@ -12,8 +12,8 @@ import com.marciasc.recipeapplication.model.RecipeRepository;
 import java.util.List;
 
 public class RecipeViewModel extends AndroidViewModel {
-    private RecipeRepository mRepository;
-    private LiveData<List<Recipe>> mRecipes;
+    private final RecipeRepository mRepository;
+    private final LiveData<List<Recipe>> mRecipes;
 
     public RecipeViewModel(@NonNull Application application) {
         super(application);

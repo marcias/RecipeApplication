@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">My Recipes</string>
-    <string name="action_settings">Settings</string>
     <string name="no_recipes">No recipes</string>
     <string name="description">Description:</string>
     <string name="images">Images:</string>
     <string name="title">Title:</string>
     <string name="all_recipes">All Recipes</string>
     <string name="add_recipe">Add Recipe</string>
+    <string name="new_recipe">New recipe</string>
+    <string name="save_recipe">Save recipe</string>
 </resources>

@@ -20,11 +20,11 @@ import static com.marciasc.recipeapplication.R.id.ib_add_image;
 public class RemovableImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int HEADER_VIEW = 0;
     private final int ITEM_VIEW = 1;
-    private OnRemoveButtonPressed mRemovedButtonListener;
-    private OnPickImageButtonPressed mPickImageButtonListener;
-    protected LayoutInflater mLayoutInflater;
-    protected List<String> mImageList;
-    private Context mContext;
+    private final OnRemoveButtonPressed mRemovedButtonListener;
+    private final OnPickImageButtonPressed mPickImageButtonListener;
+    private final LayoutInflater mLayoutInflater;
+    private final Context mContext;
+    private List<String> mImageList;
 
     public RemovableImageAdapter(Context context, OnRemoveButtonPressed removeListener, OnPickImageButtonPressed pickListener) {
         mContext = context;
@@ -49,6 +49,7 @@ public class RemovableImageAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             Uri imageUri = Uri.parse(mImageList.get(getPosition(position)));
             Glide.with(mContext)
                     .load(imageUri)
+                    .override(400,400)
                     .into(((ImageViewHolder) holder).getImageView());
             ((ImageViewHolder) holder).getRemoveIcon().setVisibility(View.VISIBLE);
             ((ImageViewHolder) holder).getRemoveIcon().setOnClickListener(new View.OnClickListener() {
@@ -98,8 +99,8 @@ public class RemovableImageAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         void onPickImageButtonPressed();
     }
 
-    public class HeaderViewHolder extends RecyclerView.ViewHolder {
-        private ImageButton addImageButton;
+    class HeaderViewHolder extends RecyclerView.ViewHolder {
+        private final ImageButton addImageButton;
 
         private HeaderViewHolder(View itemView) {
             super(itemView);
