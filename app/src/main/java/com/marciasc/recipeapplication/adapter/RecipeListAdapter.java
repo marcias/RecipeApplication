@@ -37,11 +37,9 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, final int position) {
         holder.title.setText(mRecipeList.get(position).getTitle());
         holder.description.setText(mRecipeList.get(position).getDescription());
-        LinearLayoutManager childLinearLayout = new LinearLayoutManager(holder.recyclerView.getContext(), LinearLayout.HORIZONTAL, false);
-        ImageListAdapter childAdapter = new ImageListAdapter(mContext);
-        childAdapter.setList(mRecipeList.get(position).getImagesPath());
-        holder.recyclerView.setLayoutManager(childLinearLayout);
-        holder.recyclerView.setAdapter(childAdapter);
+        holder.childAdapter.setList(mRecipeList.get(position).getImagesPath());
+        holder.recyclerView.setLayoutManager(holder.childLinearLayout);
+        holder.recyclerView.setAdapter(holder.childAdapter);
     }
 
     @Override
@@ -53,12 +51,17 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         private final TextView title;
         private final RecyclerView recyclerView;
         private final TextView description;
+        private final LinearLayoutManager childLinearLayout;
+        private final ImageListAdapter childAdapter;
 
         private RecipeViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.tv_title);
             description = itemView.findViewById(R.id.tv_description);
             recyclerView = itemView.findViewById(R.id.rv_images);
+            childLinearLayout = new LinearLayoutManager(recyclerView.getContext(), LinearLayout.HORIZONTAL, false);
+            childAdapter = new ImageListAdapter(mContext);
+
         }
     }
 
